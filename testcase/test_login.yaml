@@ -1,0 +1,15 @@
+- name: 获取access_token
+  request:
+    method: POST
+    url: /api/auth/login
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    json:
+      username: stu001
+      password: "123456"
+  validate:
+    - status_in: [200]
+    - eq: [body.code, 200]
+    - not_null: [body.data.token]
+

@@ -1,0 +1,25 @@
+  - name: 修改毕业生档案
+    request:
+      method: PUT
+      url: /api/graduate/profile
+      headers:
+        Content-Type: application/json
+        Accept: application/json
+        Authorization: Bearer ${token}
+      # PUT请求传json请求体，用json，不是params！params是url问号后面参数
+      json:
+        realName: "张三"
+        gender: "男"
+        phone: "13800000000"
+        email: "zhangsan@example.com"
+        major: "计算机科学与技术"
+        graduationYear: 2026
+        skills: "Java, Spring Boot, MySQL"
+        jobIntention: "后端开发"
+        avatar: ""
+    validate:
+      - status_in: [200]
+      - eq: [body.code, 200]
+      - not_null: [body.data.realName]
+      - eq: [body.data.jobIntention, "后端开发"]
+      - contains: [body.data.skills, "Spring Boot"]

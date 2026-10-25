@@ -1,0 +1,23 @@
+- name: 查询个人信息成功
+  request:
+    method: GET
+    url: /api/graduate/profile
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+  validate:
+    - eq: [status_code, 200]
+    - eq: [body.code, 200]
+    - not_null: [body.data.realName]
+
+- name: 查询个人信息成功2
+  request:
+    method: GET
+    url: /api/graduate/profile
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+  validate:
+    - eq: [status_code, 200]
+    - eq: [body.code, 200]
+    - not_null: [body.data.realName]

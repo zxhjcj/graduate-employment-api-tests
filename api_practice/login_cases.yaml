@@ -1,0 +1,42 @@
+- name: 正确账号密码
+  request:
+    method: POST
+    url: /api/auth/login
+    json:
+      username: stu001
+      password: "123456"
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+  validate:
+    - eq: [ status_code, 200 ]
+    - eq: [ body.code, 200 ]
+    - not_null: [ body.data.token ]
+
+- name: 错误账号
+  request:
+    method: POST
+    url: /api/auth/login
+    json:
+      username: admin1
+      password: "123456"
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+  validate:
+    - eq: [ status_code, 400 ]
+    - eq: [ body.code, 400 ]
+
+- name: 错误密码
+  request:
+    method: POST
+    url: /api/auth/login
+    json:
+      username: stu001
+      password: "789654"
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+  validate:
+    - eq: [ status_code, 400 ]
+    - eq: [ body.code, 400 ]

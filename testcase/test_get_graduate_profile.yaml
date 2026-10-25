@@ -1,0 +1,11 @@
+  - name: 查询就业情况
+    request:
+      method: GET
+      url: /api/graduate/profile
+      headers:
+        Content-Type: application/json
+        Accept: application/json
+        Authorization: Bearer ${token}
+    validate:
+      - status_in: [200]
+      - eq: [ body.code, 200 ]
